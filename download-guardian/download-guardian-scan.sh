@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
 # ─── Configuration ──────────────────────────────────────────────────
-WATCH_DIR="$HOME/Downloads"
 CLAMSCAN_OPTS="--infected --recursive --remove=no"
 LOG_FILE="$HOME/download-guardian.log"
+WATCH_DIR=$(xdg-user-dir DOWNLOAD 2>/dev/null)
+# Fallback if the above failed or is empty
+if [[ -z "$WATCH_DIR" ]]; then
+  WATCH_DIR="$HOME/Downloads"
+fi
 # ────────────────────────────────────────────────────────────────────
 
 # Ensure required commands exist:
